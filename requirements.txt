@@ -1,0 +1,5 @@
+streamlit==1.26.0
+supervision==0.13.0
+ultralytics==8.0.164
+opencv-python-headless==4.8.0.74
+gdown==4.7.1
