@@ -118,7 +118,7 @@ frame_placeholder = st.empty()
 def callback(frame: np.ndarray, index:int) -> np.ndarray:
    
     # model prediction on single frame and conversion to supervision Detections
-    results = model(frame)[0]
+    results = model(frame, verbose=False)[0]
     detections = sv.Detections.from_ultralytics(results)
     # only consider class id from selected_classes define above
     detections = detections[np.isin(detections.class_id, selected_class_ids)]
