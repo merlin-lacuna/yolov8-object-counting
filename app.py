@@ -10,7 +10,6 @@ import numpy as np
 from PIL import Image
 import tempfile
 import gdown
-import torch
 
 
 st.title('YOLOV8 Object Counting')
@@ -57,9 +56,11 @@ if uploaded_file is not None:
     tfile = tempfile.NamedTemporaryFile(delete=True)
     tfile.write(uploaded_file.read())
     SOURCE_VIDEO_PATH = tfile.name
-
-
 # Adding space between sidebar items
+st.sidebar.markdown("<br>", unsafe_allow_html=True)  # Add space
+
+#adjust confidence threshold
+confidence_threshold = st.sidebar.slider("Confidence Threshold", min_value=0.0, max_value=1.0, value=0.25, step=0.01)
 st.sidebar.markdown("<br>", unsafe_allow_html=True)  # Add space
 
 # Select desired detection classes
@@ -122,6 +123,7 @@ def callback(frame: np.ndarray, index:int) -> np.ndarray:
     detections = sv.Detections.from_ultralytics(results)
     # only consider class id from selected_classes define above
     detections = detections[np.isin(detections.class_id, selected_class_ids)]
+    detections = detections[detections.confidence > confidence_threshold]
     # tracking detections
     detections = byte_tracker.update_with_detections(detections)
     labels = [
@@ -170,4 +172,3 @@ sv.process_video(
     target_path = TARGET_VIDEO_PATH,
     callback=callback
 )
-
