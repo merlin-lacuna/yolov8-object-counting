@@ -177,9 +177,13 @@ def main():
         # update line counter
         line_zone.trigger(detections)
         line_counter_annotated_frame = line_zone_annotator.annotate(box_annotated_frame, line_counter=line_zone)
-        # display frame
-        image_pil = Image.fromarray(cv2.cvtColor(line_counter_annotated_frame, cv2.COLOR_BGR2RGB))
-        frame_placeholder.image(image_pil, use_column_width=True)
+        # # display frame
+        # image_pil = Image.fromarray(cv2.cvtColor(line_counter_annotated_frame, cv2.COLOR_BGR2RGB))
+        # frame_placeholder.image(image_pil, use_column_width=True)
+
+        _, buffer = cv2.imencode('.jpg', line_counter_annotated_frame)
+        frame_as_bytes = buffer.tobytes()
+        frame_placeholder.image(frame_as_bytes, channels="BGR", use_column_width=True, output_format="auto")
         return  line_counter_annotated_frame
 
     # Video display
