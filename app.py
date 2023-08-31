@@ -134,9 +134,9 @@ def main():
 
     # Point Configuration
     st.sidebar.markdown("<br>", unsafe_allow_html=True)  # Add space
-    st.sidebar.markdown(f"Line Counter Configuration:")
-    LINE_START = tuple(map(int, st.sidebar.text_input("Starting Point (x,y)", "180,50").split(',')))
-    LINE_END = tuple(map(int, st.sidebar.text_input("Ending Point (x,y)", "180,1230").split(',')))
+    with st.sidebar.expander("⚙️ Line Points Configuration: ", expanded=True):
+        LINE_START = tuple(map(int, st.text_input("Starting Point (x,y)", "180,50").split(',')))
+        LINE_END = tuple(map(int, st.text_input("Ending Point (x,y)", "180,1230").split(',')))
 
     # Check x from either LINE_START or LINE_END should be smaller than  video_information.width otherwise raise error
     if LINE_START[0] > video_info.width or LINE_END[0] > video_info.width:
@@ -147,21 +147,20 @@ def main():
         st.error('y from either LINE_START or LINE_END should be smaller or equal to  video height')
         st.stop()
 
-
     # Box annotator
-    st.sidebar.markdown("<br>", unsafe_allow_html=True)  # Add space
-    st.sidebar.markdown(f"Box Annotator Configuration:")
-    box_annotator_thickness = st.sidebar.number_input("Box Thickness", min_value=1, value=1)
-    box_annotator_text_thickness = st.sidebar.number_input("Box Text Thickness", min_value=1, value=1)
-    box_annotator_text_scale = st.sidebar.number_input("Box Text Scale", min_value=0.1, max_value=1.0, value=0.5)
+    # st.sidebar.markdown(f"Box Annotator Configuration:")
+    with st.sidebar.expander("⚙️ Box Annotator Configuration: ", expanded=False):
+        box_annotator_thickness = st.number_input("Box Thickness", min_value=1, value=1)
+        box_annotator_text_thickness = st.number_input("Box Text Thickness", min_value=1, value=1)
+        box_annotator_text_scale = st.number_input("Box Text Scale", min_value=0.1, max_value=1.0, value=0.5)
 
 
     # Line counter annotator
-    st.sidebar.markdown("<br>", unsafe_allow_html=True)  # Add space
-    st.sidebar.markdown(f"Line Counter Annotator Configuration:")
-    line_thickness = st.sidebar.number_input("Line Thickness", min_value=1, value=1)
-    line_text_thickness = st.sidebar.number_input("Line Text Thickness", min_value=1, value=1)
-    line_text_scale = st.sidebar.number_input("Line Text Scale", min_value=0.1, max_value=1.0, value=0.5)
+    # st.sidebar.markdown(f"Line Counter Annotator Configuration:")
+    with st.sidebar.expander("⚙️ Line Annotator Configuration: ", expanded=False):
+        line_thickness = st.number_input("Line Thickness", min_value=1, value=1)
+        line_text_thickness = st.number_input("Line Text Thickness", min_value=1, value=1)
+        line_text_scale = st.number_input("Line Text Scale", min_value=0.1, max_value=1.0, value=0.5)
 
 
     # ------------------------ Video Processing---------------------------------
