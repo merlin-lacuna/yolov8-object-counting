@@ -50,9 +50,12 @@ st.markdown('Welcome to the YOLOV8 Object Counting Demo App! This app is built b
         'view project source code on '
         '[GitHub](https://github.com/grhaonan/yolov8-object-counting)')
 
-st.markdown('Please remeber to adjust the line counter configuration to fit your video otherwise it will raise error when point value if out of range!')
-
 st.markdown('Detail explainatuion of this app can be found at [Medium](https://medium.com/@grdustin/yolov8-object-counting-19fa384a9cd3)')
+
+st.markdown('Note: Please remeber to adjust the line counter configuration to fit your video otherwise it will raise error when point value if out of range!')
+
+st.markdown('Streamlit Cloud is CPU only, so the processing speed is slow, and cloud resouces can be contrained from time to time, so please be patient.'
+            'I highly recommend you to run this app locally and please refer to the README.md in repo for more details')
 
 def main():
     # ------------------------pre-loading---------------------------------
@@ -80,7 +83,7 @@ def main():
     # Remove *.mp4 in data/processed/
     remove_mp4_except_bgl("data/processed")
 
-
+    # ------------------------ Streamlit Sidebar ---------------------------------
     #Show mode size info in sidebar
     st.sidebar.markdown(f"Model Type: {MODEL_NAME[:-3]}")
     st.sidebar.markdown("<br>", unsafe_allow_html=True)  # Add space
@@ -204,8 +207,6 @@ def main():
         target_path = VIDEO_PATHS['target'],
         callback=callback
     )
-
-
 
 if __name__ == "__main__":
     # call main function
