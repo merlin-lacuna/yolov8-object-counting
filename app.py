@@ -43,8 +43,20 @@ def remove_mp4_except_bgl(directory):
 
 # ------------------------ Streamlit App Description ---------------------------------
 
-st.title('YOLOV8 Object Counting')
+st.set_page_config(
+    page_title="YOLOV8 Object Counting",
+    page_icon="🧊",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': 'https://github.com/grhaonan/yolov8-object-counting',
+        'Report a bug': 'https://github.com/grhaonan/yolov8-object-counting',
+        'About': 'Demo app for YOLOV8 Object Counting'
+    }
+)
 
+st.title('YOLOV8 Object Counting')
+st.subheader('A Streamlit App for Object Counting using YOLOV8 & Supervision')
 st.markdown('Welcome to the YOLOV8 Object Counting Demo App! This app is built by '
         '[Dustin Liu](https://www.linkedin.com/in/dustin-liu/) - '
         'view project source code on '
